@@ -4,7 +4,7 @@
     "description": "WhatsApp Userbot",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js",
+        "start": "pm2 start . --attach --name X-BOT-MD",
         "test": "echo \"No tests specified\" && exit 0"
     },
     "author": "TOXIC DEVIL",
