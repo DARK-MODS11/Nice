@@ -8,7 +8,7 @@ Sparky(
     type: "owner",
   },
 
-  async (sparky, match) => {
+  async (sparky, match, msg) => {
     if (!msg.reply.image)
       return await msg.reply("*Reply to a photo*");
     let media = await msg.quoted.download();
