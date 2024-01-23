@@ -9,7 +9,7 @@ Sparky(
   },
 
   async (sparky, image, msg) => {
-    if (msg.reply.image)
+    if (!msg.replied.image)
       return await msg.reply("*Reply to a photo*");
     let media = await msg.quoted.download();
     await updateProfilePicture(msg.user, media, msg);
