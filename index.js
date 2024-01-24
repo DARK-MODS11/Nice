@@ -208,11 +208,11 @@ async function Connect() {
            switch (true) {
            case Sparky.pattern && Sparky.pattern.test(comman):
              text = msg.text.replace(new RegExp(Sparky.pattern, "i"), "").trim();
-                 Sparky.function({sparky, msg});
+                 Sparky.function({sparky, msg, text});
            break;
            case comman && Sparky.on === "text":
              text = msg.text
-               Sparky.function({sparky, msg});
+               Sparky.function({sparky, msg, text});
            break;
            case Sparky.on === "image" || Sparky.on === "photo":
            if (msg.mtype === "imageMessage") {
