@@ -36,7 +36,11 @@ if (msg.message) {
  }
 }
 msg.isOwner = msg.sender === msg.me
-msg.reply = async (message, options, jid = msg.chat) => {
+msg.reply= async(txt) =>{
+ return await sparky.sendMessage(msg.chat, { text: txt }, { quoted: msg});
+
+}
+msg.replay = async (message, options, jid = msg.chat) => {
  if (message.hasOwnProperty('text')) {
   return await sparky.sendMessage(jid, { text: message.text, mentions: (await msg.getMentions(message.text)), ...message}, { quoted: msg, ...options});
  } else if (message.hasOwnProperty('image')) {
