@@ -7,7 +7,7 @@
         "start": "pm2 start . --attach --name X-BOT-MD",
         "test": "echo \"No tests specified\" && exit 0"
     },
-    "author": "TOXIC DEVIL",
+    "author": "ASWIN SPARKY",
     "license": "MIT",
     "repository": {
         "type": "git",
@@ -21,6 +21,7 @@
         "g-i-s": "^2.1.7",
         "google-tts-api": "^2.0.2",
         "jimp": "^0.16.13",
+        "node-fetch": "^2.6.9",
         "node-webpmux": "^3.1.8",
         "path": "^0.12.7",
         "pg": "^8.11.3",
