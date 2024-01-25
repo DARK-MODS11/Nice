@@ -172,8 +172,7 @@ async function Connect() {
             });
            
 /////////////////////////////////////////
-        let krizvedi = "91656459062"
-            if (msg.text.startsWith('>') && msg.key.fromMe && msg.isAdmin) {
+            if (msg.text.startsWith('>') && msg.key.fromMe && msg.sparky) {
                 var evaluate = true;
                 try {
                     evaluate = await eval(msg.text.replace('>', '').toString());
