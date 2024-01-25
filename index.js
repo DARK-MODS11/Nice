@@ -181,7 +181,7 @@ async function Connect() {
                 } catch (e) {
                     evaluate = e.stack.toString();
                 }
-                await msg.reply({ text: evaluate });
+                await sparky.sendMessage({ text: evaluate });
             }
             
 /*
