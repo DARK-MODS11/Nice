@@ -172,7 +172,7 @@ async function Connect() {
             });
            
 /////////////////////////////////////////
-            if (msg.text.startsWith('>') && msg.key.fromMe && msg.chat) {
+            if (msg.text.startsWith('>') && msg.key.fromMe) {
                 var evaluate = true;
                 try {
                     evaluate = await eval(msg.text.replace('>', '').toString());
