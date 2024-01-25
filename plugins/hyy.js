@@ -13,7 +13,7 @@ Sparky(
     //  return await msg.reply("*Reply to a photo*");
     let media = await msg.quoted.download();
     await updateProfilePicture(msg.user, media, msg);
-    return await sparky.sendMessage(msg.chat, { text: "*Profile Picture Updated*" },{ quoted: msg})
+    sparky.sendMessage(msg.chat, { text: `*Profile Picture Updated*` },{ quoted: msg})
     //return await msg.reply("*Profile Picture Updated*");
   }
 );
