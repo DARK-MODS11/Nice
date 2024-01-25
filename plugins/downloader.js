@@ -18,3 +18,20 @@ const aud = await (await fetch(`${response.data.downloadUrl}`)).buffer()
     sparky.sendMessage(msg.chat , {audio : aud , mimetype : 'audio/mpeg'} , { quoted : msg })
   }
   );
+
+Sparky(
+  {
+    pattern: "video",
+    desc: "To check ping",
+    type: "user",
+  },
+  async ({sparky , msg, text}) => {
+//if(!msg.isGroup) 
+//return await sparky.sendMessage(msg.chat, { text: "*This is a Group Command*" },{ quoted: msg})
+const res = await axios.get(`https://aswin-sparky-api.up.railway.app/downloader/yt_video?search=${text}`)
+let response = await res.data
+sparky.sendMessage(msg.chat, { text: `*Downloading ${response.data.title}*` },{ quoted: msg})
+const vid = await (await fetch(`${response.data.url}`)).buffer()
+    sparky.sendMessage(msg.chat , {video : vid} , { quoted : msg })
+  }
+  );
