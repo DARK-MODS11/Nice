@@ -35,8 +35,23 @@ sparky.sendMessage(msg.chat, { text: `*Downloading ${response.data.title}*` },{ 
 const vid = await (await fetch(`${response.data.url}`)).buffer()
     sparky.sendMessage(msg.chat , {video : vid} , { quoted : msg })
     */
-    var ytmp4 = await fetch(`https://aswin-sparky-api.up.railway.app/downloader/yt_video?search=${text}`);
-        var yt = await ytmp4.json();
-        sparky.sendMessage(msg.chat, { video :{ url: yt.data.url }, caption: `*${yt.data.title}*`}, {quoted: msg })
+    var ytmp41 = await fetch(`https://aswin-sparky-api.up.railway.app/downloader/yt_video?search=${text}`);
+        var yt1 = await ytmp41.json();
+        sparky.sendMessage(msg.chat, { video :{ url: yt1.data.url }, caption: `*${yt1.data.title}*`}, {quoted: msg })
+  }
+  );
+
+Sparky(
+  {
+    pattern: "ytv",
+    desc: "To check ping",
+    type: "user",
+  },
+  async ({sparky , msg, text}) => {
+//if(!msg.isGroup) 
+//return await sparky.sendMessage(msg.chat, { text: "*This is a Group Command*" },{ quoted: msg})
+    var ytmp4 = await fetch(`https://vihangayt.me/download/ytmp4?url=${text}`);
+    var yt = await ytmp4.json();
+    sparky.sendMessage(msg.chat, { video :{ url: yt.data.vid_360p }, caption: `*${yt.data.title}*`}, {quoted: msg })
   }
   );
