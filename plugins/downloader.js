@@ -26,18 +26,11 @@ Sparky(
     type: "user",
   },
   async ({sparky , msg, text}) => {
-    /*
 //if(!msg.isGroup) 
 //return await sparky.sendMessage(msg.chat, { text: "*This is a Group Command*" },{ quoted: msg})
-const res = await axios.get(`https://aswin-sparky-api.up.railway.app/downloader/yt_video?search=kerosine`)
-let response = await res.data
-sparky.sendMessage(msg.chat, { text: `*Downloading ${response.data.title}*` },{ quoted: msg})
-const vid = await (await fetch(`${response.data.url}`)).buffer()
-    sparky.sendMessage(msg.chat , {video : vid} , { quoted : msg })
-    */
-    var ytmp41 = await fetch(`https://aswin-sparky-api.up.railway.app/downloader/yt_video?search=${text}`);
-        var yt1 = await ytmp41.json();
-        sparky.sendMessage(msg.chat, { video :{ url: yt1.data.url }, caption: `*${yt1.data.title}*`}, {quoted: msg })
+let result = await axios.get(`https://aswin-sparky-api.up.railway.app/downloader/yt_video?search=${text}`);
+var yt = result.data
+sparky.sendMessage(msg.chat, { video :{ url: yt.result.url }, caption: `*${yt.result.title}*`}, {quoted: msg })
   }
   );
 
