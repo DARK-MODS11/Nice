@@ -9,12 +9,11 @@ Sparky(
   },
 
   async (sparky, image, msg) => {
-   // if (!msg.replied.image)
-    //  return await msg.reply("*Reply to a photo*");
+   if (!msg.replied.image)
+    return await msg.reply("*Reply to a photo*");
     let media = await msg.quoted.download();
     await updateProfilePicture(msg.user, media, msg);
-    sparky.sendMessage(msg.chat, { text: `*Profile Picture Updated*` },{ quoted: msg})
-    //return await msg.reply("*Profile Picture Updated*");
+    return await msg.reply("*Profile Picture Updated*");
   }
 );
 
