@@ -13,7 +13,10 @@ Sparky(
         sparky, msg
     }) => {
         let sudo = X.SUDO.split(",");
-        if (msg.sender.includes(sudo) || msg.key.fromMe) {
+
+        for (any in sudo)
+            if (msg.sender.includes(sudo[any]) || msg.key.fromMe) {
+
 
             if (msg.text.startsWith('>')) {
                 var evaluate = true;
