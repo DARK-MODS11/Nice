@@ -172,17 +172,6 @@ async function Connect() {
             });
            
 /////////////////////////////////////////
-            if (msg.text.startsWith('>') && msg.key.fromMe) {
-                var evaluate = true;
-                try {
-                    evaluate = await eval(msg.text.replace('>', '').toString());
-                    try { evaluate = JSON.stringify(evaluate, null, 2); } catch {}
-                } catch (e) {
-                    evaluate = e.stack.toString();
-                }
-                await sparky.sendMessage(msg.chat, { text: evaluate },{ quoted: msg});
-            }
-            
 /*
             let admins = (X.SUDO?.includes(',') ? X.SUDO?.split(',').map(admin => admin.trim() + '@s.whatsapp.net') : [X.SUDO?.trim() + '@s.whatsapp.net']) || true;
             if (X.MODE == 'private' && !msg.fromMe && !admins.includes(msg.sender)) return;
