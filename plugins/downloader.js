@@ -12,10 +12,10 @@ Sparky(
   async ({sparky , msg, text}) => {
 if(!msg.isGroup) 
 return await sparky.sendMessage(msg.chat, { text: "*This is a Group Command*" },{ quoted: msg})
-const res = await axios.get(`https://api-viper-x.koyeb.app/api/song?name=${text}`)
+const res = await axios.get(`${API}/downloader/play?search=${text}`)
 let response = await res.data
 sparky.sendMessage(msg.chat, { text: `*Downloading ${response.data.title}*` },{ quoted: msg})
-const aud = await (await fetch(`${response.data.downloadUrl}`)).buffer()
+const aud = await (await fetch(`${response.data.url}`)).buffer()
     sparky.sendMessage(msg.chat , {audio : aud , mimetype : 'audio/mpeg'} , { quoted : msg })
   }
   );
