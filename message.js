@@ -35,6 +35,57 @@ if (msg.message) {
   msg.replied.document = msg.replied.documentMessage || false
  }
 }
+//////////////////////////////////////////////////////////////////////////////////
+const downloadMedia = (message, pathFile) =>
+new Promise(async (resolve, reject) => {
+    let type = Object.keys(message)[0];
+    let mimeMap = {
+        imageMessage: "image",
+        videoMessage: "video",
+        stickerMessage: "sticker",
+        documentMessage: "document",
+        audioMessage: "audio",
+    };
+    let mes = message;
+    if (type == "templateMessage") {
+        mes = message.templateMessage.hydratedFourRowTemplate;
+        type = Object.keys(mes)[0];
+    }
+    if (type == "buttonsMessage") {
+        mes = message.buttonsMessage;
+        type = Object.keys(mes)[0];
+    }
+    try {
+        if (pathFile) {
+            const stream = await downloadContentFromMessage(
+                mes[type],
+                mimeMap[type]
+            );
+            let buffer = Buffer.from([]);
+            for await (const chunk of stream) {
+                buffer = Buffer.concat([buffer, chunk]);
+            }
+            await fs.promises.writeFile(pathFile, buffer);
+            resolve(pathFile);
+        } else {
+            const stream = await downloadContentFromMessage(
+                mes[type],
+                mimeMap[type]
+            );
+            let buffer = Buffer.from([]);
+            for await (const chunk of stream) {
+                buffer = Buffer.concat([buffer, chunk]);
+            }
+            resolve(buffer);
+        }
+    } catch (e) {
+        reject(e);
+    }
+});
+//////////////////////////////////////////////////////////////////////////////////
+msg.replied.dl = (pathFile) =>
+                downloadMedia(msg.replied, pathFile);
+//////////////////////////////////////////////////////////////////////////////////
 msg.isOwner = msg.sender === msg.me
 msg.reply= async(txt) =>{
  return await sparky.sendMessage(msg.chat, { text: txt }, { quoted: msg});
