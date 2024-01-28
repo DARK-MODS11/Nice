@@ -33,8 +33,7 @@ if (msg.message) {
   msg.replied.audio = msg.replied.audioMessage || false
   msg.replied.sticker = msg.replied.stickerMessage || false
   msg.replied.document = msg.replied.documentMessage || false
- }
-}
+
 //////////////////////////////////////////////////////////////////////////////////
 const downloadMedia = (message, pathFile) =>
 new Promise(async (resolve, reject) => {
@@ -83,9 +82,14 @@ new Promise(async (resolve, reject) => {
     }
 });
 //////////////////////////////////////////////////////////////////////////////////
-msg.replied.dl = (pathFile) =>
-                downloadMedia(msg.replied, pathFile);
+msg.replied.dl = async(pathFile) => {
+               await downloadMedia(msg.replied, pathFile)
+}
 //////////////////////////////////////////////////////////////////////////////////
+
+ }
+}
+
 msg.isOwner = msg.sender === msg.me
 msg.reply= async(txt) =>{
  return await sparky.sendMessage(msg.chat, { text: txt }, { quoted: msg});
