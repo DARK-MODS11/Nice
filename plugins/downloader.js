@@ -16,7 +16,23 @@ const res = await axios.get(`https://api-viper-x.koyeb.app/api/song?name=${text}
 let response = await res.data
 sparky.sendMessage(msg.chat, { text: `*Downloading ${response.data.title}*` },{ quoted: msg})
 const aud = await (await fetch(`${response.data.downloadUrl}`)).buffer()
-    sparky.sendMessage(msg.chat , {audio : aud , mimetype : 'audio/mpeg'} , { quoted : msg })
+    //sparky.sendMessage(msg.chat , {audio : aud , mimetype : 'audio/mpeg'} , { quoted : msg })
+sparky.sendMessage(msg.chat,{
+    audio: aud ,
+    fileName: "hello" + '.mp3',
+    mimetype: 'audio/mpeg', ptt: true,
+    contextInfo:{
+        externalAdReply:{
+            title:"jobin",
+            body: "jhhhh",
+            thumbnail:"https://i.imgur.com/sPc9fWc.png",
+            mediaType:2,
+            mediaUrl:"https://youtube.com/shorts/6HLVVMWxtYM?si=1shjEldn6pT7E8ps",
+        }
+
+    },
+},{quoted:msg})
+    
   }
   );
 
