@@ -2,7 +2,7 @@ const { Sparky } = require("../index.js");
 const axios = require("axios");
 const fetch = require("node-fetch")
 let API = "https://api-aswin-sparky.koyeb.app"
-
+let botname = "SPARKY-MD"
 Sparky(
   {
     pattern: "play",
@@ -19,20 +19,20 @@ const aud = await (await fetch(`${response.data.downloadUrl}`)).buffer()
     //sparky.sendMessage(msg.chat , {audio : aud , mimetype : 'audio/mpeg'} , { quoted : msg })
 sparky.sendMessage(msg.chat,{
     audio: aud ,
-   // fileName: "hello" + '.mp3',
-    mimetype: 'audio/mpeg', //ptt: true,
+    mimetype: 'audio/mpeg', ptt: false,
     contextInfo:{
         externalAdReply:{
-            title:"jobin",
-            body: "jhhhh",
-            thumbnail:"https://i.imgur.com/sPc9fWc.png",
-            mediaType:2,
-            mediaUrl:"https://youtube.com/shorts/6HLVVMWxtYM?si=1shjEldn6pT7E8ps",
+            title:`${response.data.title}`,
+            body: `${botname}`,
+            thumbnail: await (await fetch(`${response.data.thumbnail}`)).buffer(),
+            mediaType:2,   
+showAdAttribution: true,             
+           sourceUrl: `${response.data.url}`,
+            mediaUrl: `${response.data.url}`,
         }
 
     },
-},{quoted: msg })
-    
+},{quoted: msg })    
   }
   );
 
