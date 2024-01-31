@@ -29,7 +29,7 @@ Sparky(
   async ({sparky , msg, text}) => {
 //if(!msg.isGroup) 
 //return await sparky.sendMessage(msg.chat, { text: "*This is a Group Command*" },{ quoted: msg})
-let result = await axios.get(`${API}/downloader/yt_video?search=${text}`);
+let result = await axios.get(`${API}/api/downloader/yt_video?search=${text}`);
 var yt = result.data
 sparky.sendMessage(msg.chat, { video :{ url: yt.result.url }, caption: `*${yt.result.title}*`}, {quoted: msg })
   }
