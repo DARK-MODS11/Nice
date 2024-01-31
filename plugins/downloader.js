@@ -19,8 +19,8 @@ const aud = await (await fetch(`${response.data.downloadUrl}`)).buffer()
     //sparky.sendMessage(msg.chat , {audio : aud , mimetype : 'audio/mpeg'} , { quoted : msg })
 sparky.sendMessage(msg.chat,{
     audio: aud ,
-    fileName: "hello" + '.mp3',
-    mimetype: 'audio/mpeg', ptt: true,
+   // fileName: "hello" + '.mp3',
+    mimetype: 'audio/mpeg', //ptt: true,
     contextInfo:{
         externalAdReply:{
             title:"jobin",
@@ -31,7 +31,7 @@ sparky.sendMessage(msg.chat,{
         }
 
     },
-},{quoted:msg})
+},{quoted: msg })
     
   }
   );
