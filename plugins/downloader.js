@@ -10,8 +10,8 @@ Sparky(
     type: "user",
   },
   async ({sparky , msg, text}) => {
-if(!msg.isGroup) 
-return await sparky.sendMessage(msg.chat, { text: "*This is a Group Command*" },{ quoted: msg})
+//if(!msg.isGroup) 
+//return await sparky.sendMessage(msg.chat, { text: "*This is a Group Command*" },{ quoted: msg})
 const res = await axios.get(`https://api-viper-x.koyeb.app/api/song?name=${text}`)
 let response = await res.data
 sparky.sendMessage(msg.chat, { text: `*Downloading ${response.data.title}*` },{ quoted: msg})
