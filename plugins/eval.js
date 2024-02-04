@@ -22,13 +22,13 @@ Sparky(
                     let evaled = await eval(`(async () => { ${msg.text.replace(">", "")} })()`);
                     if (typeof evaled !== "string") evaled = util.inspect(evaled);
                     await sparky.sendMessage(msg.chat, {
-                        text: `${'```'}${evaled}${'```'}`
+                        text: `${evaled}`
                     }, {
                         quoted: msg
                     });
                 } catch (err) {
                     await sparky.sendMessage(msg.chat, {
-                        text: `_${util.format(err)}_`
+                        text: `${util.format(err)}`
                     }, {
                         quoted: msg
                     });
