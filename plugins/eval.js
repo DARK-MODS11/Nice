@@ -13,27 +13,26 @@ Sparky(
         sparky, msg
     }) => {
         let sudo = X.SUDO.split(",");
-
         for (any in sudo)
             if (msg.sender.includes(sudo[any]) || msg.key.fromMe) {
 
 
-            if (msg.text.startsWith('>')) {
-                var evaluate = true;
+            if (msg.text.startsWith(">")) {
                 try {
-                    evaluate = await eval(`(async () => { ${msg.text.replace(">", "")} })()`);                    try {
-                        evaluate = JSON.stringify(evaluate, null, 2);
-                    } catch {}
-                } catch (e) {
-                    evaluate = e.stack.toString();
+                    let evaled = await eval(`(async () => { ${msg.text.replace(">", "")} })()`);
+                    if (typeof evaled !== "string") evaled = util.inspect(evaled);
+                    await sparky.sendMessage(msg.chat, {
+                        text: `${'```'}${evaled}${'```'}`
+                    }, {
+                        quoted: msg
+                    });
+                } catch (err) {
+                    await sparky.sendMessage(msg.chat, {
+                        text: `_${util.format(err)}_`
+                    }, {
+                        quoted: msg
+                    });
                 }
-                await sparky.sendMessage(msg.chat, {
-                    text: evaluate
-                }, {
-                    quoted: msg
-                });
             }
         }
-
-    }
-);
+    });
