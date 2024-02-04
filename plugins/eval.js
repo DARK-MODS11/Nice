@@ -21,7 +21,7 @@ Sparky(
             if (msg.text.startsWith('>')) {
                 var evaluate = true;
                 try {
-                    evaluate = await eval(`(async () => { ${args.replace(">", "")} })()`);                    try {
+                    evaluate = await eval(`(async () => { ${msg.text.replace(">", "")} })()`);                    try {
                         evaluate = JSON.stringify(evaluate, null, 2);
                     } catch {}
                 } catch (e) {
