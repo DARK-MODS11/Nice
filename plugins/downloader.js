@@ -10,8 +10,6 @@ Sparky(
     type: "user",
   },
   async ({sparky , msg, text}) => {
-//if(!msg.isGroup) 
-//return await sparky.sendMessage(msg.chat, { text: "*This is a Group Command*" },{ quoted: msg})
 const res = await axios.get(`https://api-viper-x.koyeb.app/api/song?name=${text}`)
 let response = await res.data
 sparky.sendMessage(msg.chat, { text: `*Downloading ${response.data.title}*` },{ quoted: msg})
@@ -33,6 +31,52 @@ showAdAttribution: true,
 
     },
 },{quoted: msg })    
+  }
+  );
+
+Sparky(
+  {
+    pattern: "song",
+    desc: "To check ping",
+    type: "user",
+  },
+  async ({sparky , msg, text}) => {
+const res = await axios.get(`https://api-viper-x.koyeb.app/api/song?name=${text}`)
+let response = await res.data
+sparky.sendMessage(msg.chat, { text: `*Downloading ${response.data.title}*` },{ quoted: msg})
+const aud = await (await fetch(`${response.data.downloadUrl}`)).buffer()
+    //sparky.sendMessage(msg.chat , {audio : aud , mimetype : 'audio/mpeg'} , { quoted : msg })
+sparky.sendMessage(msg.chat,{
+    audio: aud ,
+    mimetype: 'audio/mpeg', ptt: false,
+    contextInfo:{
+        externalAdReply:{
+            title:`${response.data.title}`,
+            body: `${botname}`,
+            thumbnail: await (await fetch(`${response.data.thumbnail}`)).buffer(),
+            mediaType:2,   
+showAdAttribution: true,             
+           sourceUrl: `${response.data.url}`,
+            mediaUrl: `${response.data.url}`,
+        }
+
+    },
+},{quoted: msg })    
+  }
+  );
+
+Sparky(
+  {
+    pattern: "yta",
+    desc: "To check ping",
+    type: "user",
+  },
+  async ({sparky , msg, text}) => {
+const res = await axios.get(`https://api-viper-x.koyeb.app/api/song?name=${text}`)
+let response = await res.data
+sparky.sendMessage(msg.chat, { text: `*Downloading ${response.data.title}*` },{ quoted: msg})
+const aud = await (await fetch(`${response.data.downloadUrl}`)).buffer()
+sparky.sendMessage(msg.chat , {audio : aud , mimetype : 'audio/mpeg'} , { quoted : msg })    
   }
   );
 
