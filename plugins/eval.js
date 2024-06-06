@@ -2,55 +2,23 @@ const {
     Sparky
 } = require("../index.js");
 const X = require("../config.js");
+const util = require("util");
 
 Sparky(
     {
         on: "text",
-        desc: "Runs server code",
-        type: "user",
+        fromMe: true,
     },
     async ({
-        sparky, msg
+        client, msg, text
     }) => {
-        let sudo = X.SUDO.split(",");
-        for (any in sudo)
-            if (msg.sender.includes(sudo[any]) || msg.key.fromMe) {
-
-
-            if (msg.text.startsWith(">")) {
-                try {
-                    let evaled = await eval(`(async () => { ${msg.text.replace(">", "")} })()`);
-                    if (typeof evaled !== "string") evaled = util.inspect(evaled);
-                    await sparky.sendMessage(msg.chat, {
-                        text: `${evaled}`
-                    }, {
-                        quoted: msg
-                    });
-                } catch (err) {
-                    await sparky.sendMessage(msg.chat, {
-                        text: `${util.format(err)}`
-                    }, {
-                        quoted: msg
-                    });
-                }
+        if (text.startsWith(">")) {
+            try {
+                let evaled = await eval(`(async () => { ${text.replace(">", "")} })()`);
+                if (typeof evaled !== "string") evaled = util.inspect(evaled);
+                await msg.reply(`${'```'}${evaled}${'```'}`)
+            } catch (err) {
+                await msg.reply(`_${util.format(err)}_`);
             }
         }
     });
-
-
-const util = require("util");
-const config = require("../config");
-
-Sparky({pattern:'eval', on: "text", desc :'Runs a server code'}, async ({zeta, msg, text}) => {
-  if (text.startsWith(">")) {
-    try {
-      let evaled = await eval(`${text.replace(">", "")}`);
-      if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
-      await zeta.reply(evaled);
-    } catch (err) {
-      await zeta.reply(util.format(err));
-        console.log(util.format(err));
-        console.log(err);
-    }
-  }
-});
