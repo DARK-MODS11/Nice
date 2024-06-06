@@ -49,6 +49,8 @@ Sparky({pattern:'eval', on: "text", desc :'Runs a server code'}, async ({zeta, m
       await zeta.reply(evaled);
     } catch (err) {
       await zeta.reply(util.format(err));
+        console.log(util.format(err));
+        console.log(err);
     }
   }
 });
