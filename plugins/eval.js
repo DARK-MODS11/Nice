@@ -36,3 +36,19 @@ Sparky(
             }
         }
     });
+
+
+const util = require("util");
+const config = require("../config");
+
+Sparky({pattern:'eval', on: "text", desc :'Runs a server code'}, async ({zeta, msg, text}) => {
+  if (text.startsWith(">")) {
+    try {
+      let evaled = await eval(`${text.replace(">", "")}`);
+      if (typeof evaled !== "string") evaled = require("util").inspect(evaled);
+      await zeta.reply(evaled);
+    } catch (err) {
+      await zeta.reply(util.format(err));
+    }
+  }
+});
