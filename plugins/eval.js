@@ -10,7 +10,7 @@ Sparky(
         fromMe: true,
     },
     async ({
-        client, msg, text
+        sparky, msg, text
     }) => {
         if (text.startsWith(">")) {
             try {
