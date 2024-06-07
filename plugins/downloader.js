@@ -109,3 +109,23 @@ Sparky(
     sparky.sendMessage(msg.chat, { video :{ url: yt.data.vid_360p }, caption: `*${yt.data.title}*`}, {quoted: msg })
   }
   );
+
+Sparky(
+  {
+    pattern: "insta",
+    desc: "instagram downloader",
+    type: "downloader",
+  },
+  async ({sparky , msg, text}) => {
+    if (!text) return await msg.reply("link thada pundachii");
+let { data } = await axios.get(`https://api-aswin-sparky.koyeb.app/api/downloader/igdl?url=${text}`)
+
+let ur = data.data[0].url
+let type = data.data[0].type
+
+if (type == "video") {
+await sparky.sendMessage(msg.chat, { video: { url: ur }, mimetype: "video/mp4" }, { quoted: msg })
+} else {
+await sparky.sendMessage(msg.chat, { image: { url: ur }, mimetype: "image/jpeg" }, { quoted: msg })
+  }
+  });
