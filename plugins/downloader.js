@@ -110,6 +110,25 @@ Sparky(
   }
   );
 
+async function getBuffer(url, options) {
+  try {
+    options ? options : {};
+    const res = await require("axios")({
+      method: "get",
+      url,
+      headers: {
+        DNT: 1,
+        "Upgrade-Insecure-Request": 1,
+      },
+      ...options,
+      responseType: "arraybuffer",
+    });
+    return res.data;
+  } catch (e) {
+    console.log(`Error : ${e}`);
+  }
+}
+
 Sparky(
   {
     pattern: "insta",
@@ -118,14 +137,17 @@ Sparky(
   },
   async ({sparky , msg, text}) => {
     if (!text) return await msg.reply("link thada pundachii");
-let { data } = await axios.get(`https://api-aswin-sparky.koyeb.app/api/downloader/igdl?url=${text}`)
+    if (!text.includes("www.instagram.com/")) return await msg.reply("Instagram link thada pundachii");
+let { data } = await axios.get(`https://profile-4h33.onrender.com/api/download/insta?url=${text}`)
 
-let ur = data.data[0].url
-let type = data.data[0].type
-
-if (type == "video") {
-await sparky.sendMessage(msg.chat, { video: { url: ur }, mimetype: "video/mp4" }, { quoted: msg })
+for (let i = 0; i < data.data.length; i++) {
+let ur = data.data[i].download_link;
+let buf = await getBuffer(ur);
+let { mime } = await require("file-type").fromBuffer(buf);
+if (mime == "video/mp4") {
+await sparky.sendMessage(msg.chat, { video: { url: ur }, mimetype: "video/mp4", caption: "𝘉𝘢𝘥𝘢𝘯 𝘚𝘦𝘳" })
 } else {
-await sparky.sendMessage(msg.chat, { image: { url: ur }, mimetype: "image/jpeg" }, { quoted: msg })
-  }
-  });
+await sparky.sendMessage(msg.chat, { image: { url: ur }, mimetype: "image/jpeg", caption: "𝘉𝘢𝘥𝘢𝘯 𝘚𝘦𝘳" })
+}
+}
+});
