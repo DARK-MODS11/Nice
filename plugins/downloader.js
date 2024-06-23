@@ -136,8 +136,8 @@ Sparky(
     type: "downloader",
   },
   async ({sparky , msg, text}) => {
-    if (!text) return await msg.reply("link thada pundachii");
-    if (!text.includes("www.instagram.com/")) return await msg.reply("Instagram link thada pundachii");
+    if (!text) return await msg.reply("*provide a Instagram url*");
+    if (!text.includes("www.instagram.com/")) return await msg.reply("not a valid Instagram url");
 let { data } = await axios.get(`https://profile-4h33.onrender.com/api/download/insta?url=${text}`)
 
 for (let i = 0; i < data.data.length; i++) {
