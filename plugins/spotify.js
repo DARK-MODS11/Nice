@@ -15,7 +15,6 @@ await sparky.sendMessage(msg.chat, { audio: { url: res.data.result.url }, mimety
 Sparky(
   {
     pattern: "spotify",
-    fromMe: true,
     desc: "download spotify song/playlist",
     type: "downloader",
   },
