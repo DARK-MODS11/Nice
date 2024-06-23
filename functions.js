@@ -1,4 +1,4 @@
-const acrcloud = require('.')
+const acrcloud = require('./acr')
 const { downloadContentFromMessage } = require('@whiskeysockets/baileys')
 
 async function qdownload(ss) {
